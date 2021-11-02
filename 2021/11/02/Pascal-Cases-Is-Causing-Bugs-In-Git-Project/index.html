@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  <meta name="keywords" content="Ray Lei, Frontend Developer, React, Redux, NextJS, Ruby On Rails, Bootstrap, ExpressJS, Web Vitals, SEO, CMS(Contentful), WeChat">
+  
+  
+  <meta name="description" content="Ray Lei, a frontend developer who has expertise in React, Redux, NextJS, Ruby On Rails, Bootstrap, ExpressJS, Web Vitals, SEO, CMS(Contentful), WeChat">
+  
+  <title>
+    Pascal Cases Is Causing Bugs In Git Project |
+    
+    Ray5AM
+  </title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <main class="content">
+    <section class="outer">
+  <article id="post-Pascal-Cases-Is-Causing-Bugs-In-Git-Project" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h1 class="article-title" itemprop="name">
+  Pascal Cases Is Causing Bugs In Git Project
+</h1>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/11/02/Pascal-Cases-Is-Causing-Bugs-In-Git-Project/" class="article-date">
+  <time datetime="2021-11-02T08:51:41.000Z" itemprop="datePublished">2021-11-02</time>
+</a>
+      
+    </div>
+    
+
+    
+    
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+      <p>As the concept of <code>Component</code> thrived in frontend development, lots of things have changed. To demonstrate semantic coding practices, we use <code>Pascal Case</code> to name our components and even files.<br>Let’s take <code>React</code> as an example. We usually set up our projects by using <code>create-react-app</code>, below is the structure we get.</p>
+<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e18f372a-6043-4176-9ae8-fd107f323c82/Untitled.png" alt="Untitled"></p>
+<p>Seems like <code>Pascal Case</code> is the recommended way to name a React component, now let’s add another component called <code>Timestamp</code> and imported it in <code>App</code>, and the content is simple as below:</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Timestamp.js</span></span><br><span class="line"><span class="keyword">const</span> Timestamp = <span class="function">() =&gt;</span> (<span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123; Date.now() &#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span>);</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Timestamp;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// App.js</span></span><br><span class="line"><span class="keyword">import</span> Timestamp <span class="keyword">from</span> <span class="string">&#x27;./Timestamp&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> App = <span class="function">() =&gt;</span> (<span class="xml"><span class="tag">&lt;<span class="name">Timestamp</span> /&gt;</span></span>);</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</span><br></pre></td></tr></table></figure>
+
+<p>And the page now looks like</p>
+<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f38ceddd-0f00-494d-8e21-2153b9bcd470/Untitled.png" alt="Untitled"></p>
+<p>Commit and push our changes</p>
+<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/1abf016d-df65-4d9c-8fc8-5c8eea6e5d8b/Untitled.png" alt="Untitled"></p>
+<p>At this point, one of your teammates pulls this codebase. He thinks timestamp should be two words, so he renames <code>Timestamp.js</code> to <code>TimeStamp.js</code> and changes the code.</p>
+<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/7e28b482-4bcb-4ec4-acb5-2ff37829697d/Untitled.png" alt="Untitled"></p>
+<p>Now, if you merge his branch, your application will break</p>
+<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a6d5a287-d1ed-44e4-9131-8cdd6ffc37ad/Untitled.png" alt="Untitled"></p>
+<p>The reason is that Git is not case-sensitive on the file name. Renaming <code>Timestamp.js</code> to <code>TimeStamp.js</code> was <strong>not</strong> <strong>captured</strong>, but this line of code was</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// App.js</span></span><br><span class="line"><span class="keyword">import</span> Timestamp <span class="keyword">from</span> <span class="string">&#x27;./TimeStamp&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>This is a replay of a real production issue, so I’d recommend not to use <code>Pascal Case</code> in file names. Instead, use <code>-</code> to split the words is a better option. It’ll eliminate this kind of issue.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://insaneray.github.io/2021/11/02/Pascal-Cases-Is-Causing-Bugs-In-Git-Project/" data-id="ckvhusskb00013m6m2am56q7w" class="article-share-link">
+        Share
+      </a>
+      
+    </footer>
+
+  </div>
+
+  
+  
+  
+
+  
+  
+  
+  
+
+</article>
+</section>
+    <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+  <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+  <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>Ray5AM &copy; 2021</li>
+      
+        <li>ZHWANGART</li>
+      
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+  </main>
+  <aside class="sidebar">
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/hexo.svg" alt="Ray5AM"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gallery">Gallery</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">About</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        Search
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="fe fe-feed"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/copybtn.js"></script>
+
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  });
+</script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+
+</html>
