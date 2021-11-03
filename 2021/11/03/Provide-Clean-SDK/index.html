@@ -12,6 +12,7 @@
   <meta name="description" content="Ray Lei, a frontend developer who has expertise in React, Redux, NextJS, Ruby On Rails, Bootstrap, ExpressJS, Web Vitals, SEO, CMS(Contentful), WeChat">
   
   <title>
+    Provide Clean SDK |
     
     Ray5AM
   </title>
@@ -33,41 +34,8 @@
 
 <body>
   <main class="content">
-    <section class="jumbotron">
-  <div class="video">
-    
-    <div class="video-frame">
-      <img src="/images/ocean/overlay-hero.png" alt="Decorative image frame">
-    </div>
-    
-    <div class="video-media">
-      <video playsinline="" autoplay="" loop="" muted="" data-autoplay="" poster="/images/ocean/ocean.png"
-        x5-video-player-type="h5">
-        <source src="/images/ocean/ocean.mp4" type="video/mp4">
-        <source src="/images/ocean/ocean.ogv" type="video/ogg">
-        <source src="/images/ocean/ocean.webm" type="video/webm">
-        <p>Your user agent does not support the HTML5 Video element.</p>
-      </video>
-      <div class="video-overlay"></div>
-    </div>
-    <div class="video-inner text-center text-white">
-      <h1><a href="/">Ray5AM</a></h1>
-      <p>Frontend Dev 💻, Guitar Player 🎸, Sports Lover 🏃</p>
-      <div><img src="/images/hexo-inverted.svg" class="brand" alt="Ray5AM"></div>
-    </div>
-    <div class="video-learn-more">
-      <a class="anchor" href="#landingpage"><i class="fe fe-mouse"></i></a>
-    </div>
-  </div>
-</section>
-<div id="landingpage">
-  <section class="outer">
-  <article class="articles">
-    
-    <h1 class="page-type-title"></h1>
-    
-    
-    <article id="post-Provide-Clean-SDK" class="article article-type-post" itemscope
+    <section class="outer">
+  <article id="post-Provide-Clean-SDK" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -75,9 +43,9 @@
     <header class="article-header">
       
 
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/11/03/Provide-Clean-SDK/">Provide Clean SDK</a>
-</h2>
+<h1 class="article-title" itemprop="name">
+  Provide Clean SDK
+</h1>
 
 
 
@@ -94,11 +62,11 @@
     
 
     
+    
+    
 
     <div class="article-entry" itemprop="articleBody">
       
-      
-        
       
       
       <blockquote>
@@ -131,96 +99,34 @@
   </div>
 
   
+  
+<nav class="article-nav">
+  
+  
+  <a href="/2021/11/02/Pascal-Cases-Is-Causing-Bugs-In-Git-Project/" class="article-nav-link">
+    <strong class="article-nav-caption">Older</strong>
+    <div class="article-nav-title">Pascal Cases Is Causing Bugs In Git Project</div>
+  </a>
+  
+</nav>
 
+  
+
+  
+  
+  
   
 
 </article>
-    
-    <article id="post-Pascal-Cases-Is-Causing-Bugs-In-Git-Project" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/11/02/Pascal-Cases-Is-Causing-Bugs-In-Git-Project/">Pascal Cases Is Causing Bugs In Git Project</a>
-</h2>
-
-
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/11/02/Pascal-Cases-Is-Causing-Bugs-In-Git-Project/" class="article-date">
-  <time datetime="2021-11-02T08:51:41.000Z" itemprop="datePublished">2021-11-02</time>
-</a>
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        
-      
-      
-      <p>As the concept of <code>Component</code> thrived in frontend development, lots of things have changed. To demonstrate semantic coding practices, we use <code>Pascal Case</code> to name our components and even files.<br>Let’s take <code>React</code> as an example. We usually set up our projects by using <code>create-react-app</code>, below is the structure we get.</p>
-<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e18f372a-6043-4176-9ae8-fd107f323c82/Untitled.png" alt="Untitled"></p>
-<p>Seems like <code>Pascal Case</code> is the recommended way to name a React component, now let’s add another component called <code>Timestamp</code> and imported it in <code>App</code>, and the content is simple as below:</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Timestamp.js</span></span><br><span class="line"><span class="keyword">const</span> Timestamp = <span class="function">() =&gt;</span> (<span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123; Date.now() &#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span>);</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Timestamp;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// App.js</span></span><br><span class="line"><span class="keyword">import</span> Timestamp <span class="keyword">from</span> <span class="string">&#x27;./Timestamp&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> App = <span class="function">() =&gt;</span> (<span class="xml"><span class="tag">&lt;<span class="name">Timestamp</span> /&gt;</span></span>);</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</span><br></pre></td></tr></table></figure>
-
-<p>And the page now looks like</p>
-<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f38ceddd-0f00-494d-8e21-2153b9bcd470/Untitled.png" alt="Untitled"></p>
-<p>Commit and push our changes</p>
-<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/1abf016d-df65-4d9c-8fc8-5c8eea6e5d8b/Untitled.png" alt="Untitled"></p>
-<p>At this point, one of your teammates pulls this codebase. He thinks timestamp should be two words, so he renames <code>Timestamp.js</code> to <code>TimeStamp.js</code> and changes the code.</p>
-<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/7e28b482-4bcb-4ec4-acb5-2ff37829697d/Untitled.png" alt="Untitled"></p>
-<p>Now, if you merge his branch, your application will break</p>
-<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a6d5a287-d1ed-44e4-9131-8cdd6ffc37ad/Untitled.png" alt="Untitled"></p>
-<p>The reason is that Git is not case-sensitive on the file name. Renaming <code>Timestamp.js</code> to <code>TimeStamp.js</code> was <strong>not</strong> <strong>captured</strong>, but this line of code was</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// App.js</span></span><br><span class="line"><span class="keyword">import</span> Timestamp <span class="keyword">from</span> <span class="string">&#x27;./TimeStamp&#x27;</span>;</span><br></pre></td></tr></table></figure>
-
-<p>This is a replay of a real production issue, so I’d recommend not to use <code>Pascal Case</code> in file names. Instead, use <code>-</code> to split the words is a better option. It’ll eliminate this kind of issue.</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://insaneray.github.io/2021/11/02/Pascal-Cases-Is-Causing-Bugs-In-Git-Project/" data-id="ckvhw4h540000vj6m7u056sq4" class="article-share-link">
-        Share
-      </a>
-      
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-    
-  </article>
-  
-
-  
 </section>
-</div>
     <footer class="footer">
   <div class="outer">
     <div class="float-right">
       <ul class="list-inline">
   
-  <li><i class="fe fe-bar-chart"></i> <span id="busuanzi_value_site_pv"></span></li>
-  
   <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+  <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
   
 </ul>
     </div>
@@ -315,6 +221,23 @@
 
 
 
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  });
+</script>
 
 
 
